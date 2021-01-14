@@ -8,8 +8,25 @@ pipeline {
     }
 
     stage('Build') {
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'date'
+          }
+        }
+
+        stage('Build2') {
+          steps {
+            build 'test1'
+          }
+        }
+
+      }
+    }
+
+    stage('Final') {
       steps {
-        sh 'date'
+        echo 'This is final step'
       }
     }
 
